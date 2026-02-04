@@ -247,19 +247,34 @@
     </div>
 
     <div id="invoiceSec" class="page-section">
-        <h2>فاتورة طلبية</h2>
+        <h2>تسجيل فاتورة طلبية</h2>
         <form id="invoiceForm" onsubmit="submitInvoice(event)">
-            <input type="text" name="rest_name" placeholder="اسم المطعم" required>
-            <input type="text" name="driver_name" placeholder="اسم المندوب" required>
-            <input type="text" name="card_id" placeholder="رقم بطاقة المندوب" required>
-            <input type="text" name="location" placeholder="مكان التوصيل" required>
+            
+            <label>اسم المطعم</label>
+            <input type="text" name="rest_name" required>
+            
+            <label>اسم المندوب</label>
+            <input type="text" name="driver_name" required>
+
+            <label>رقم بطاقة المندوب</label>
+            <input type="text" name="card_id" required>
+            
+            <label>مكان التوصيل</label>
+            <input type="text" name="location" required>
+            
+            <label>التاريخ</label>
             <input type="date" name="date_val" required>
-            <textarea name="details" placeholder="تفاصيل الطلبية"></textarea>
-            <input type="number" step="0.01" name="price" placeholder="قيمة الطلبية" required>
-            <button type="submit" class="submit-btn">إرسال</button>
+            
+            <label>تفاصيل الطلبية</label>
+            <textarea name="details" rows="3" required></textarea>
+            
+            <label>قيمة الطلبية (ر.ع)</label>
+            <input type="number" step="0.01" name="price" required>
+
+            <button type="submit" class="submit-btn">إرسال الفاتورة</button>
             <div id="loader2" class="loader"></div>
         </form>
-        <button class="back-btn" onclick="goBack()">عودة</button>
+        <button class="back-btn" onclick="goBack()">عودة للقائمة</button>
     </div>
     <div id="settingsSec" class="page-section">
         <div id="loginBlock">
