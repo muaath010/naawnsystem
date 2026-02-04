@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فريق نعاون لخدمات التوصيل</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #D4AF37;
+            --gold-light: #F4C430;
+            --red: #800000;
+            --red-bright: #b30000;
+            --dark: #121212;
+            --dark-card: #1E1E1E;
+            --text: #ffffff;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: var(--dark);
+            color: var(--text);
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Header Design */
+        header {
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(to bottom, var(--red), var(--dark));
+            border-bottom: 2px solid var(--gold);
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
+        }
+
+        h1 {
+            color: var(--gold);
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px black;
+            margin-bottom: 5px;
+        }
+        
+        .slogan { font-size: 1rem; color: #ddd; letter-spacing: 1px; }
+
+        /* Main Menu Buttons */
+        .menu-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 90%;
+            max-width: 400px;
+            animation: fadeIn 1s ease-in;
+        }
+
+        .main-btn {
+            background: linear-gradient(145deg, var(--dark-card), #2a2a2a);
+            border: 2px solid var(--gold);
+            color: var(--gold);
+            padding: 20px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .main-btn:hover {
+            background: var(--gold);
+            color: var(--red);
+            transform: translateY(-3px);
+            box-shadow: 0 0 15px var(--gold);
+        }
+
+        /* Forms & Pages */
+        .page-section {
+            display: none; /* Hidden by default */
+            background-color: var(--dark-card);
+            width: 90%;
+            max-width: 500px;
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid var(--gold);
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            animation: slideUp 0.5s ease;
+            margin-bottom: 40px;
+        }
+
+        h2 { color: var(--gold); margin-bottom: 20px; border-bottom: 1px solid #444; padding-bottom: 10px; }
+
+        label { display: block; text-align: right; margin: 10px 0 5px; color: #ccc; }
+        
+        input, textarea, select {
+            width: 100%;
+            padding: 12px;
+            background: #2b2b2b;
+            border: 1px solid #444;
+            border-radius: 8px;
+            color: white;
+            font-family: 'Tajawal', sans-serif;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus, textarea:focus { border-color: var(--gold); background: #333; }
+
+        .submit-btn {
+            width: 100%;
+            margin-top: 20px;
+            padding: 12px;
+            background: var(--red);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .submit-btn:hover { background: var(--red-bright); }
+
+        .back-btn {
+            margin-top: 15px;
+            background: transparent;
+            border: 1px solid #555;
+            color: #aaa;
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+        .back-btn:hover { color: white; border-color: white; }
+
+        /* Table Design */
+        .table-container { overflow-x: auto; margin-top: 15px; }
+        table { width: 100%; border-collapse: collapse; min-width: 300px; }
+        th, td { padding: 10px; border: 1px solid #444; font-size: 0.9rem; }
+        th { background-color: var(--red); color: white; }
+        td { background-color: #2b2b2b; }
+
+        /* Loader */
+        .loader {
+            display: none;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--gold);
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 10px auto;
+        }
+
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>فريق نعاون</h1>
+        <div class="slogan">لخدمات التوصيل الاحترافية</div>
+    </header>
+
+    <div id="mainMenu" class="menu-container">
+        <button class="main-btn" onclick="showSection('deductionSec')">
+             لوحة الاستقطاعات
+        </button>
+        <button class="main-btn" onclick="showSection('invoiceSec')">
+             لوحة فواتير الطلبات
+        </button>
+        <button class="main-btn" onclick="showSection('settingsSec')">
+             الإعدادات (دخول المطاعم)
+        </button>
+    </div>
+
+    <div id="deductionSec" class="page-section">
+        <h2>تسجيل استقطاع جديد</h2>
+        <form id="deductionForm" onsubmit="submitDeduction(event)">
+            <label>اسم المندوب</label>
+            <input type="text" name="driver" required>
+            
+            <label>عدد الطلبات</label>
+            <input type="number" name="orders_count" required>
+            
+            <label>التاريخ</label>
+            <input type="date" name="date_val" required>
+            
+            <label>مبلغ التوصيل (كل مبلغ في سطر جديد)</label>
+            <textarea name="amounts" rows="4" placeholder="مثال:&#10;1.500&#10;2.000"></textarea>
+            
+            <label>الاستقطاع (ر.ع)</label>
+            <input type="text" name="deduction" required>
+
+            <button type="submit" class="submit-btn">إرسال البيانات</button>
+            <div id="loader1" class="loader"></div>
+        </form>
+        <button class="back-btn" onclick="goBack()">عودة للقائمة</button>
+    </div>
+
+    <div id="invoiceSec" class="page-section">
+        <h2>تسجيل فاتورة طلبية</h2>
+        <form id="invoiceForm" onsubmit="submitInvoice(event)">
+            <label>اسم المطعم</label>
+            <input type="text" name="rest_name" required>
+            
+            <label>اسم المندوب</label>
+            <input type="text" name="driver_name" required>
+            
+            <label>مكان التوصيل</label>
+            <input type="text" name="location" required>
+            
+            <label>التاريخ</label>
+            <input type="date" name="date_val" required>
+            
+            <label>تفاصيل الطلبية</label>
+            <textarea name="details" rows="3" required></textarea>
+            
+            <label>قيمة الطلبية</label>
+            <input type="number" step="0.01" name="price" required>
+
+            <button type="submit" class="submit-btn">إرسال الفاتورة</button>
+            <div id="loader2" class="loader"></div>
+        </form>
+        <button class="back-btn" onclick="goBack()">عودة للقائمة</button>
+    </div>
+
+    <div id="settingsSec" class="page-section">
+        <div id="loginBlock">
+            <h2>دخول شركاء المطاعم</h2>
+            <label>اسم المطعم</label>
+            <input type="text" id="loginRestName" placeholder="أدخل اسم المطعم بدقة">
+            
+            <label>الرمز السري</label>
+            <input type="password" id="loginPass">
+            
+            <button onclick="checkLogin()" class="submit-btn">تسجيل الدخول</button>
+            <div id="loader3" class="loader"></div>
+        </div>
+
+        <div id="dashboardBlock" style="display: none;">
+            <h2 id="dashTitle">ملخص الطلبات</h2>
+            <div class="table-container" id="resultsArea">
+                </div>
+            <button onclick="location.reload()" class="submit-btn" style="background: #444; margin-top: 15px;">تسجيل خروج</button>
+        </div>
+        
+        <button class="back-btn" onclick="goBack()">عودة للقائمة</button>
+    </div>
+
+    <script>
+        // !!! هام جداً: ضع رابط الـ Web App الخاص بك هنا بين علامتي التنصيص !!!
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzJM5pFp8-TmttPc963HQTCShD47uFxARQf83zMoDx9xrn3H4dpyVtrlYCgTsrKeMPa/exec";
+
+        function showSection(id) {
+            document.getElementById('mainMenu').style.display = 'none';
+            document.querySelectorAll('.page-section').forEach(sec => sec.style.display = 'none');
+            document.getElementById(id).style.display = 'block';
+        }
+
+        function goBack() {
+            document.querySelectorAll('.page-section').forEach(sec => sec.style.display = 'none');
+            document.getElementById('mainMenu').style.display = 'flex';
+        }
+
+        // إرسال الاستقطاعات
+        function submitDeduction(e) {
+            e.preventDefault();
+            document.getElementById('loader1').style.display = 'block';
+            
+            const form = document.getElementById('deductionForm');
+            const data = new FormData(form);
+            
+            // تحويل البيانات لرابط
+            const params = new URLSearchParams();
+            params.append('action', 'addDeduction');
+            for (const pair of data) { params.append(pair[0], pair[1]); }
+
+            fetch(SCRIPT_URL, {
+                method: "POST",
+                body: params
+            })
+            .then(response => {
+                alert("تمت إضافة الاستقطاع بنجاح! ✅");
+                form.reset();
+                document.getElementById('loader1').style.display = 'none';
+                goBack();
+            })
+            .catch(error => {
+                alert("حدث خطأ، تأكد من الإنترنت ❌");
+                document.getElementById('loader1').style.display = 'none';
+            });
+        }
+
+        // إرسال الفواتير
+        function submitInvoice(e) {
+            e.preventDefault();
+            document.getElementById('loader2').style.display = 'block';
+            
+            const form = document.getElementById('invoiceForm');
+            const data = new FormData(form);
+            
+            const params = new URLSearchParams();
+            params.append('action', 'addInvoice');
+            for (const pair of data) { params.append(pair[0], pair[1]); }
+
+            fetch(SCRIPT_URL, {
+                method: "POST",
+                body: params
+            })
+            .then(response => {
+                alert("تم إرسال الفاتورة بنجاح! ✅");
+                form.reset();
+                document.getElementById('loader2').style.display = 'none';
+                goBack();
+            })
+            .catch(error => {
+                alert("حدث خطأ ❌");
+                document.getElementById('loader2').style.display = 'none';
+            });
+        }
+
+        // تسجيل دخول المطعم
+        function checkLogin() {
+            const restName = document.getElementById('loginRestName').value.trim();
+            const pass = document.getElementById('loginPass').value;
+            const loader = document.getElementById('loader3');
+
+            if (pass !== "res9090") {
+                alert("الرمز السري غير صحيح ❌");
+                return;
+            }
+            if (restName === "") {
+                alert("الرجاء كتابة اسم المطعم");
+                return;
+            }
+
+            loader.style.display = 'block';
+
+            fetch(SCRIPT_URL)
+            .then(response => response.json())
+            .then(data => {
+                loader.style.display = 'none';
+                
+                // فلترة البيانات بناء على اسم المطعم
+                // ملاحظة: العمود رقم 1 في الشيت هو اسم المطعم (Index 1)
+                const myOrders = data.filter(row => row[1] == restName);
+
+                if (myOrders.length === 0) {
+                    alert("لا توجد طلبات مسجلة لهذا المطعم حتى الآن");
+                    return;
+                }
+
+                // بناء الجدول
+                let html = `<table>
+                    <thead>
+                        <tr>
+                            <th>المندوب</th>
+                            <th>التاريخ</th>
+                            <th>المكان</th>
+                            <th>القيمة</th>
+                            <th>التفاصيل</th>
+                        </tr>
+                    </thead>
+                    <tbody>`;
+                
+                myOrders.forEach(row => {
+                    // تحويل التاريخ لصيغة مقروءة
+                    let dateStr = row[4];
+                    if(row[4].toString().includes('T')) dateStr = row[4].split('T')[0];
+
+                    html += `<tr>
+                        <td>${row[2]}</td>
+                        <td>${dateStr}</td>
+                        <td>${row[3]}</td>
+                        <td>${row[6]}</td>
+                        <td>${row[5]}</td>
+                    </tr>`;
+                });
+
+                html += `</tbody></table>`;
+
+                document.getElementById('resultsArea').innerHTML = html;
+                document.getElementById('loginBlock').style.display = 'none';
+                document.getElementById('dashboardBlock').style.display = 'block';
+                document.getElementById('dashTitle').innerText = "أهلاً بك: " + restName;
+            })
+            .catch(error => {
+                console.error(error);
+                alert("فشل في جلب البيانات، حاول مرة أخرى");
+                loader.style.display = 'none';
+            });
+        }
+    </script>
+</body>
+</html>
