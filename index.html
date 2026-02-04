@@ -193,7 +193,48 @@
             animation: spin 1s linear infinite;
             margin: 10px auto;
         }
+/* تنسيق العناوين والمجموعات لتبدو مثل الصورة */
+.input-group {
+    margin-bottom: 20px;
+    text-align: right; /* محاذاة كل شيء لليمين */
+}
 
+label {
+    display: block;
+    color: #ccc; /* لون رمادي فاتح للعناوين */
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+    font-weight: bold;
+    padding-right: 5px;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 12px 15px;
+    background: #252525; /* لون داكن للمربعات مثل الصورة */
+    border: 1px solid #444;
+    border-radius: 15px; /* زوايا منحنية احترافية */
+    color: white;
+    font-family: 'Tajawal', sans-serif;
+    outline: none;
+    transition: 0.3s;
+    text-align: right; /* محاذاة النص داخل المربع لليمين */
+}
+
+input:focus, textarea:focus {
+    border-color: var(--gold);
+    background: #2a2a2a;
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.1);
+}
+
+/* تنسيق العناوين الرئيسية في اللوحة */
+h2 {
+    color: var(--gold);
+    margin-bottom: 25px;
+    font-size: 1.5rem;
+    border-bottom: 1px solid #333;
+    padding-bottom: 15px;
+}
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
