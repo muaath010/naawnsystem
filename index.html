@@ -330,7 +330,81 @@
     </div>
 
     <script>
-        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx1hRv8i1aIGB1NDusyQtCLmz5qBs4-7fpQGhhY0WyqQSYGKMbvV4xSkEt0GXAqxhO0/exec";
+        <script>
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby-z1C749QPg7ZOcSTR5csOGqDU0mu3DvW0WlLW08pgrotGIVSRCbd202XbTrL0izw/exec";
+
+    function showSection(id) {
+        document.getElementById('mainMenu').style.display = 'none';
+        document.querySelectorAll('.page-section').forEach(sec => sec.style.display = 'none');
+        document.getElementById(id).style.display = 'block';
+    }
+
+    function goBack() {
+        document.querySelectorAll('.page-section').forEach(sec => sec.style.display = 'none');
+        document.getElementById('mainMenu').style.display = 'flex';
+    }
+
+    // --- تسجيل دخول المندوب ---
+    function loginDriver() {
+        const cardID = document.getElementById('driverCardID').value.trim();
+        if(!cardID) { alert("لطفاً أدخل رقم البطاقة"); return; }
+        
+        document.getElementById('loaderLogin').style.display = 'block';
+
+        fetch(SCRIPT_URL + "?query=drivers")
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('loaderLogin').style.display = 'none';
+            
+            // البحث برقم البطاقة في العمود الثاني (Index 1)
+            const driverOrders = data.filter(row => row[1] == cardID);
+            
+            showSection('driverDashboard');
+            document.getElementById('welcomeDriver').innerText = "أهلاً بك مندوب رقم " + cardID;
+            document.getElementById('orderCountDisplay').innerText = driverOrders.length;
+            
+            // تعبئة رقم البطاقة تلقائياً في فورم الاستقطاع وإخفاء الخانة لعدم التعديل
+            document.getElementById('driverCardInput').value = cardID;
+        })
+        .catch(error => {
+            alert("خطأ في جلب بيانات العداد");
+            document.getElementById('loaderLogin').style.display = 'none';
+            showSection('driverDashboard'); // الدخول حتى لو فشل العداد
+        });
+    }
+
+    // --- إرسال الاستقطاع ---
+    function submitDeduction(e) {
+        e.preventDefault();
+        document.getElementById('loader1').style.display = 'block';
+        const form = document.getElementById('deductionForm');
+        const data = new FormData(form);
+        const params = new URLSearchParams();
+        
+        params.append('action', 'addDeduction');
+        for (const pair of data) { params.append(pair[0], pair[1]); }
+
+        fetch(SCRIPT_URL, { method: "POST", body: params })
+        .then(response => {
+            alert("تم تسجيل البيانات بنجاح! ✅");
+            
+            // تحديث العداد في لوحة التحكم
+            let countElem = document.getElementById('orderCountDisplay');
+            countElem.innerText = parseInt(countElem.innerText) + 1;
+
+            form.reset();
+            // إعادة رقم البطاقة بعد المسح
+            document.getElementById('driverCardInput').value = document.getElementById('driverCardID').value;
+            showSection('driverDashboard');
+            document.getElementById('loader1').style.display = 'none';
+        })
+        .catch(error => {
+            alert("حدث خطأ في الإرسال ❌");
+            document.getElementById('loader1').style.display = 'none';
+        });
+    }
+
+    // ... باقي الدوال (الفواتير ودخول المطاعم) تبقى كما هي في الكود السابق
 
         function showSection(id) {
             document.getElementById('mainMenu').style.display = 'none';
