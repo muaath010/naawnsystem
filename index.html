@@ -6,55 +6,56 @@
     <title>فريق نعاون لخدمات التوصيل</title>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        /* تصميم الصورة الدائرية مع حركة النبض */
-.logo-container {
-    position: relative;
-    width: 120px;
-    height: 120px;
-    margin: 0 auto 15px auto; /* توسيط الصورة */
-}
-
-.logo-container img {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%; /* جعل الصورة دائرية */
-    border: 3px solid var(--gold);
-    object-fit: cover;
-    position: relative;
-    z-index: 2;
-}
-
-/* تأثير النبض الذهبي */
-.logo-container::after {
-    content: "";
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    border-radius: 50%;
-    background: var(--gold);
-    opacity: 0.5;
-    animation: pulse 2s infinite;
-    z-index: 1;
-}
-
-@keyframes pulse {
-    0% { transform: scale(1); opacity: 0.5; }
-    100% { transform: scale(1.5); opacity: 0; }
-}
         :root {
             --gold: #D4AF37;
             --gold-light: #F4C430;
             --red: #800000;
             --red-bright: #b30000;
-            --dark: #121212;
-            --dark-card: #1E1E1E;
-            --text: #ffffff;
+            --light-bg: #fdfdfd; /* لون الخلفية الفاتح */
+            --card-bg: #ffffff;  /* لون البطاقات */
+            --text: #333333;     /* لون النص الأساسي (غامق) */
+            --text-light: #666666;
+        }
+
+        /* تصميم الصورة الدائرية مع حركة النبض */
+        .logo-container {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 15px auto;
+        }
+
+        .logo-container img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 3px solid var(--gold);
+            object-fit: cover;
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo-container::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: 50%;
+            background: var(--gold);
+            opacity: 0.5;
+            animation: pulse 2s infinite;
+            z-index: 1;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.5; }
+            100% { transform: scale(1.5); opacity: 0; }
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
         body {
             font-family: 'Tajawal', sans-serif;
-            background-color: var(--dark);
+            background-color: var(--light-bg);
             color: var(--text);
             text-align: center;
             min-height: 100vh;
@@ -63,24 +64,24 @@
             align-items: center;
         }
 
-        /* Header Design */
+        /* Header Design - التعديل هنا (من أحمر إلى أبيض) */
         header {
             width: 100%;
-            padding: 20px;
-            background: linear-gradient(to bottom, var(--red), var(--dark));
+            padding: 30px 20px;
+            background: linear-gradient(to bottom, var(--red), var(--light-bg));
             border-bottom: 2px solid var(--gold);
             margin-bottom: 30px;
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
         }
 
         h1 {
             color: var(--gold);
             font-size: 2.5rem;
-            text-shadow: 2px 2px 4px black;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
             margin-bottom: 5px;
         }
         
-        .slogan { font-size: 1rem; color: #ddd; letter-spacing: 1px; }
+        .slogan { font-size: 1.1rem; color: var(--text); font-weight: bold; }
 
         /* Main Menu Buttons */
         .menu-container {
@@ -93,16 +94,16 @@
         }
 
         .main-btn {
-            background: linear-gradient(145deg, var(--dark-card), #2a2a2a);
-            border: 2px solid var(--gold);
-            color: var(--gold);
+            background: var(--card-bg);
+            border: 2px solid var(--red);
+            color: var(--red);
             padding: 20px;
             font-size: 1.2rem;
             font-weight: bold;
             border-radius: 15px;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -110,131 +111,104 @@
         }
 
         .main-btn:hover {
-            background: var(--gold);
-            color: var(--red);
+            background: var(--red);
+            color: white;
             transform: translateY(-3px);
-            box-shadow: 0 0 15px var(--gold);
+            box-shadow: 0 5px 15px rgba(128, 0, 0, 0.2);
         }
 
         /* Forms & Pages */
         .page-section {
-            display: none; /* Hidden by default */
-            background-color: var(--dark-card);
+            display: none;
+            background-color: var(--card-bg);
             width: 90%;
             max-width: 500px;
             padding: 30px;
             border-radius: 20px;
-            border: 1px solid var(--gold);
-            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            border: 1px solid #eee;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
             animation: slideUp 0.5s ease;
             margin-bottom: 40px;
         }
 
-        h2 { color: var(--gold); margin-bottom: 20px; border-bottom: 1px solid #444; padding-bottom: 10px; }
+        h2 { color: var(--red); margin-bottom: 25px; border-bottom: 2px solid var(--gold); padding-bottom: 10px; }
 
-        label { display: block; text-align: right; margin: 10px 0 5px; color: #ccc; }
-        
+        .input-group { margin-bottom: 20px; text-align: right; }
+
+        label {
+            display: block;
+            color: var(--text-light);
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+            font-weight: bold;
+            padding-right: 5px;
+        }
+
         input, textarea, select {
             width: 100%;
-            padding: 12px;
-            background: #2b2b2b;
-            border: 1px solid #444;
-            border-radius: 18px;
-            color: white;
+            padding: 12px 15px;
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            color: #333;
             font-family: 'Tajawal', sans-serif;
             outline: none;
             transition: 0.3s;
+            text-align: right;
         }
 
-        input:focus, textarea:focus { border-color: var(--gold); background: #333; }
+        input:focus, textarea:focus { 
+            border-color: var(--red); 
+            background: #fff;
+            box-shadow: 0 0 8px rgba(128, 0, 0, 0.1);
+        }
 
         .submit-btn {
             width: 100%;
             margin-top: 20px;
-            padding: 12px;
+            padding: 15px;
             background: var(--red);
             color: white;
             border: none;
-            border-radius: 8px;
+            border-radius: 12px;
             font-size: 1.1rem;
             font-weight: bold;
             cursor: pointer;
             transition: 0.3s;
         }
 
-        .submit-btn:hover { background: var(--red-bright); }
+        .submit-btn:hover { background: var(--red-bright); transform: scale(1.02); }
 
         .back-btn {
             margin-top: 15px;
             background: transparent;
-            border: 1px solid #555;
-            color: #aaa;
+            border: 1px solid #ccc;
+            color: #777;
             padding: 8px 20px;
             border-radius: 20px;
             cursor: pointer;
         }
-        .back-btn:hover { color: white; border-color: white; }
+        .back-btn:hover { color: var(--red); border-color: var(--red); }
 
         /* Table Design */
-        .table-container { overflow-x: auto; margin-top: 15px; }
-        table { width: 100%; border-collapse: collapse; min-width: 300px; }
-        th, td { padding: 10px; border: 1px solid #444; font-size: 0.9rem; }
+        .table-container { overflow-x: auto; margin-top: 15px; border-radius: 10px; }
+        table { width: 100%; border-collapse: collapse; min-width: 300px; background: white; }
+        th, td { padding: 12px; border: 1px solid #eee; font-size: 0.9rem; color: #333; }
         th { background-color: var(--red); color: white; }
-        td { background-color: #2b2b2b; }
+        td { background-color: #fff; }
 
         /* Loader */
         .loader {
             display: none;
             border: 4px solid #f3f3f3;
-            border-top: 4px solid var(--gold);
+            border-top: 4px solid var(--red);
             border-radius: 50%;
             width: 30px;
             height: 30px;
             animation: spin 1s linear infinite;
             margin: 10px auto;
         }
-/* تنسيق العناوين والمجموعات لتبدو مثل الصورة */
-.input-group {
-    margin-bottom: 20px;
-    text-align: right; /* محاذاة كل شيء لليمين */
-}
 
-label {
-    display: block;
-    color: #ccc; /* لون رمادي فاتح للعناوين */
-    margin-bottom: 8px;
-    font-size: 0.95rem;
-    font-weight: bold;
-    padding-right: 5px;
-}
-
-input, textarea {
-    width: 100%;
-    padding: 12px 15px;
-    background: #252525; /* لون داكن للمربعات مثل الصورة */
-    border: 1px solid #444;
-    border-radius: 15px; /* زوايا منحنية احترافية */
-    color: white;
-    font-family: 'Tajawal', sans-serif;
-    outline: none;
-    transition: 0.3s;
-    text-align: right; /* محاذاة النص داخل المربع لليمين */
-}
-
-input:focus, textarea:focus {
-    border-color: var(--gold);
-    background: #2a2a2a;
-    box-shadow: 0 0 10px rgba(212, 175, 55, 0.1);
-}
-
-/* تنسيق العناوين الرئيسية في اللوحة */
-h2 {
-    color: var(--gold);
-    margin-bottom: 25px;
-    font-size: 1.5rem;
-    border-bottom: 1px solid #333;
-    padding-bottom: 15px;
-}
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
@@ -248,7 +222,7 @@ h2 {
             <img src="https://i.imgur.com/nYQiffV.png" alt="شعار فريق نعاون">
         </div>
         <h1>فريق نعاون</h1>
-        <div class="slogan">لخدمات التوصيل </div>
+        <div class="slogan">لخدمات التوصيل الاحترافية</div>
     </header>
 
     <div id="mainMenu" class="menu-container">
@@ -259,27 +233,33 @@ h2 {
              لوحة فواتير الطلبات
         </button>
         <button class="main-btn" onclick="showSection('settingsSec')">
-             الإعدادات
+             دخول شركاء المطاعم
         </button>
     </div>
 
     <div id="deductionSec" class="page-section">
         <h2>تسجيل استقطاع جديد</h2>
         <form id="deductionForm" onsubmit="submitDeduction(event)">
-            <label>اسم المندوب</label>
-            <input type="text" name="driver" required>
-            
-            <label>عدد الطلبات</label>
-            <input type="number" name="orders_count" required>
-            
-            <label>التاريخ</label>
-            <input type="date" name="date_val" required>
-            
-            <label>مبلغ التوصيل (كل مبلغ في سطر جديد)</label>
-            <textarea name="amounts" rows="4" placeholder="مثال:&#10;1.500&#10;2.000"></textarea>
-            
-            <label>الاستقطاع (ر.ع)</label>
-            <input type="text" name="deduction" required>
+            <div class="input-group">
+                <label>اسم المندوب</label>
+                <input type="text" name="driver" required>
+            </div>
+            <div class="input-group">
+                <label>عدد الطلبات</label>
+                <input type="number" name="orders_count" required>
+            </div>
+            <div class="input-group">
+                <label>التاريخ</label>
+                <input type="date" name="date_val" required>
+            </div>
+            <div class="input-group">
+                <label>مبلغ التوصيل (كل مبلغ في سطر جديد)</label>
+                <textarea name="amounts" rows="4" placeholder="مثال:&#10;1.500&#10;2.000"></textarea>
+            </div>
+            <div class="input-group">
+                <label>الاستقطاع الكلي (ر.ع)</label>
+                <input type="text" name="deduction" required>
+            </div>
 
             <button type="submit" class="submit-btn">إرسال البيانات</button>
             <div id="loader1" class="loader"></div>
@@ -290,58 +270,66 @@ h2 {
     <div id="invoiceSec" class="page-section">
         <h2>تسجيل فاتورة طلبية</h2>
         <form id="invoiceForm" onsubmit="submitInvoice(event)">
-            
-            <label>اسم المطعم</label>
-            <input type="text" name="rest_name" required>
-            
-            <label>اسم المندوب</label>
-            <input type="text" name="driver_name" required>
-
-            <label>رقم بطاقة المندوب</label>
-            <input type="text" name="card_id" required>
-            
-            <label>مكان التوصيل</label>
-            <input type="text" name="location" required>
-            
-            <label>التاريخ</label>
-            <input type="date" name="date_val" required>
-            
-            <label>تفاصيل الطلبية</label>
-            <textarea name="details" rows="3" required></textarea>
-            
-            <label>قيمة الطلبية (ر.ع)</label>
-            <input type="number" step="0.01" name="price" required>
+            <div class="input-group">
+                <label>اسم المطعم</label>
+                <input type="text" name="rest_name" required>
+            </div>
+            <div class="input-group">
+                <label>اسم المندوب</label>
+                <input type="text" name="driver_name" required>
+            </div>
+            <div class="input-group">
+                <label>رقم بطاقة المندوب</label>
+                <input type="text" name="card_id" required>
+            </div>
+            <div class="input-group">
+                <label>مكان التوصيل</label>
+                <input type="text" name="location" required>
+            </div>
+            <div class="input-group">
+                <label>التاريخ</label>
+                <input type="date" name="date_val" required>
+            </div>
+            <div class="input-group">
+                <label>تفاصيل الطلبية</label>
+                <textarea name="details" rows="3" required></textarea>
+            </div>
+            <div class="input-group">
+                <label>قيمة الطلبية (ر.ع)</label>
+                <input type="number" step="0.01" name="price" required>
+            </div>
 
             <button type="submit" class="submit-btn">إرسال الفاتورة</button>
             <div id="loader2" class="loader"></div>
         </form>
         <button class="back-btn" onclick="goBack()">عودة للقائمة</button>
     </div>
+
     <div id="settingsSec" class="page-section">
         <div id="loginBlock">
-            <h2>دخول شركاء المطاعم</h2>
-            <label>اسم المطعم</label>
-            <input type="text" id="loginRestName" placeholder="أدخل اسم المطعم بدقة">
-            
-            <label>الرمز السري</label>
-            <input type="password" id="loginPass">
-            
+            <h2>دخول الشركاء</h2>
+            <div class="input-group">
+                <label>اسم المطعم</label>
+                <input type="text" id="loginRestName" placeholder="أدخل اسم المطعم بدقة">
+            </div>
+            <div class="input-group">
+                <label>الرمز السري</label>
+                <input type="password" id="loginPass">
+            </div>
             <button onclick="checkLogin()" class="submit-btn">تسجيل الدخول</button>
             <div id="loader3" class="loader"></div>
         </div>
 
         <div id="dashboardBlock" style="display: none;">
             <h2 id="dashTitle">ملخص الطلبات</h2>
-            <div class="table-container" id="resultsArea">
-                </div>
-            <button onclick="location.reload()" class="submit-btn" style="background: #444; margin-top: 15px;">تسجيل خروج</button>
+            <div class="table-container" id="resultsArea"></div>
+            <button onclick="location.reload()" class="submit-btn" style="background: #666; margin-top: 15px;">تسجيل خروج</button>
         </div>
         
         <button class="back-btn" onclick="goBack()">عودة للقائمة</button>
     </div>
 
     <script>
-        // !!! هام جداً: ضع رابط الـ Web App الخاص بك هنا بين علامتي التنصيص !!!
         const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx1hRv8i1aIGB1NDusyQtCLmz5qBs4-7fpQGhhY0WyqQSYGKMbvV4xSkEt0GXAqxhO0/exec";
 
         function showSection(id) {
@@ -355,23 +343,16 @@ h2 {
             document.getElementById('mainMenu').style.display = 'flex';
         }
 
-        // إرسال الاستقطاعات
         function submitDeduction(e) {
             e.preventDefault();
             document.getElementById('loader1').style.display = 'block';
-            
             const form = document.getElementById('deductionForm');
             const data = new FormData(form);
-            
-            // تحويل البيانات لرابط
             const params = new URLSearchParams();
             params.append('action', 'addDeduction');
             for (const pair of data) { params.append(pair[0], pair[1]); }
 
-            fetch(SCRIPT_URL, {
-                method: "POST",
-                body: params
-            })
+            fetch(SCRIPT_URL, { method: "POST", body: params })
             .then(response => {
                 alert("تمت إضافة الاستقطاع بنجاح! ✅");
                 form.reset();
@@ -379,27 +360,21 @@ h2 {
                 goBack();
             })
             .catch(error => {
-                alert("حدث خطأ، تأكد من الإنترنت ❌");
+                alert("حدث خطأ ❌");
                 document.getElementById('loader1').style.display = 'none';
             });
         }
 
-        // إرسال الفواتير
         function submitInvoice(e) {
             e.preventDefault();
             document.getElementById('loader2').style.display = 'block';
-            
             const form = document.getElementById('invoiceForm');
             const data = new FormData(form);
-            
             const params = new URLSearchParams();
             params.append('action', 'addInvoice');
             for (const pair of data) { params.append(pair[0], pair[1]); }
 
-            fetch(SCRIPT_URL, {
-                method: "POST",
-                body: params
-            })
+            fetch(SCRIPT_URL, { method: "POST", body: params })
             .then(response => {
                 alert("تم إرسال الفاتورة بنجاح! ✅");
                 form.reset();
@@ -412,20 +387,13 @@ h2 {
             });
         }
 
-        // تسجيل دخول المطعم
         function checkLogin() {
             const restName = document.getElementById('loginRestName').value.trim();
             const pass = document.getElementById('loginPass').value;
             const loader = document.getElementById('loader3');
 
-            if (pass !== "res9090") {
-                alert("الرمز السري غير صحيح ❌");
-                return;
-            }
-            if (restName === "") {
-                alert("الرجاء كتابة اسم المطعم");
-                return;
-            }
+            if (pass !== "res9090") { alert("الرمز السري غير صحيح ❌"); return; }
+            if (restName === "") { alert("الرجاء كتابة اسم المطعم"); return; }
 
             loader.style.display = 'block';
 
@@ -433,9 +401,6 @@ h2 {
             .then(response => response.json())
             .then(data => {
                 loader.style.display = 'none';
-                
-                // فلترة البيانات بناء على اسم المطعم
-                // ملاحظة: العمود رقم 1 في الشيت هو اسم المطعم (Index 1)
                 const myOrders = data.filter(row => row[1] == restName);
 
                 if (myOrders.length === 0) {
@@ -443,7 +408,6 @@ h2 {
                     return;
                 }
 
-                // بناء الجدول
                 let html = `<table>
                     <thead>
                         <tr>
@@ -457,10 +421,8 @@ h2 {
                     <tbody>`;
                 
                 myOrders.forEach(row => {
-                    // تحويل التاريخ لصيغة مقروءة
                     let dateStr = row[4];
                     if(row[4].toString().includes('T')) dateStr = row[4].split('T')[0];
-
                     html += `<tr>
                         <td>${row[2]}</td>
                         <td>${dateStr}</td>
@@ -471,15 +433,13 @@ h2 {
                 });
 
                 html += `</tbody></table>`;
-
                 document.getElementById('resultsArea').innerHTML = html;
                 document.getElementById('loginBlock').style.display = 'none';
                 document.getElementById('dashboardBlock').style.display = 'block';
                 document.getElementById('dashTitle').innerText = "أهلاً بك: " + restName;
             })
             .catch(error => {
-                console.error(error);
-                alert("فشل في جلب البيانات، حاول مرة أخرى");
+                alert("فشل في جلب البيانات");
                 loader.style.display = 'none';
             });
         }
